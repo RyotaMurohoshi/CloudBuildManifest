@@ -7,9 +7,14 @@ namespace CloudBuildManifest {
     [Serializable]
     public class BuildManifest
     {
+        /// <summary>
+        /// If binary is built with Unity Cloud Build, static method <c>Load</c> returns the BuildManifest instance.
+        /// If binary is not built with Unity Cloud Build, static method <c>Load</c> returns null.
+        /// </summary>
+        /// <returns>The BuildManifest instance or null.</returns>
         public static BuildManifest Load()
         {
-            var json = Resources.Load<TextAsset>("UnityCloudBuildManifest.json");
+            var json = LoadManifestAsset();
             if (json == null)
             {
                 return null;
@@ -18,6 +23,21 @@ namespace CloudBuildManifest {
             {
                 return JsonUtility.FromJson<BuildManifest>(json.text);
             }
+        }
+
+        /// <summary>
+        /// If binary is built with Unity Cloud Build, static method <c>HasBuildManifest</c> returns true.
+        /// If binary is not built with Unity Cloud Build, static method <c>HasBuildManifest</c> returns false.
+        /// </summary>
+        /// <returns>boolean</returns>
+        public static bool HasBuildManifest()
+        {
+            return LoadManifestAsset() != null;
+        }
+
+        private static TextAsset LoadManifestAsset()
+        {
+            return Resources.Load<TextAsset>("UnityCloudBuildManifest.json");
         }
 
         [SerializeField]
