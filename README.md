@@ -4,14 +4,15 @@
 
 It is so important to get accurately build version and build commit of running game in user device for debugging. `CloudBuildManifest` provides build information from unity game that is built with `Unity Cloud Build`.
 
-## Install via Package Manager
+## Install
 
 [Git](https://git-scm.com/) must be installed and added to your path.
 
 The following line needs to be added to your `Packages/manifest.json` file in your Unity Project under the `dependencies` section:
+Please replace `TAG_YOU_WANT_TO_USE` to the tag you want to use on GitHub.
 
 ```json
-"com.ryotamurohoshi.cloudbuildmanifest": "https://github.com/RyotaMurohoshi/CloudBuildManifest.git#v0.0.1",
+"com.ryotamurohoshi.cloudbuildmanifest": "https://github.com/RyotaMurohoshi/CloudBuildManifest.git#TAG_YOU_WANT_TO_USE",
 ```
 
 ## Usage
@@ -27,23 +28,25 @@ if (BuildManifest.HasBuildManifest())
 }
 else
 {
-    buildInfoText = "XXXXXXX #0";
+    buildInfoText = "Not Cloud Build";
 }
 ```
 
 Please call `BuildManifest.Load()`. If the running game app is not built with `Unity Cloud Build`, the method returns null. If the running game app is built with `Unity Cloud Build`, the method returns valid instance. CloudBuildManifest instance has next properties.
 
-* ScmCommitId
-* ScmBranch
-* BuildNumber
-* BuildStartTime
-* ProjectId
-* BundleId
-* UnityVersion
-* XCodeVersion
-* CloudBuildTargetName
+| Property  | Information |
+----|----
+| ScmCommitId | The commit or changelist that was built. |
+| ScmBranch | The name of the branch that was built. |
+| BuildNumber | The Unity Cloud Build “build number” corresponding to this build. |
+| BuildStartTime | The UTC timestamp when the build process was started. |
+| ProjectId | The Unity project identifier. |
+| BundleId | The bundleIdentifier configured in Unity Cloud Build (iOS and Android only). |
+| UnityVersion | The version of Unity that Unity Cloud Build used to create the build. |
+| XCodeVersion | The version of XCode used to build the project (iOS only). |
+| CloudBuildTargetName | The name of the build target that was built. |
 
-For properties detail, please refer [Build manifest](https://docs.unity3d.com/Manual/UnityCloudBuildManifest.html) in Unity Documentation.
+For more information, please refer [Build manifest](https://docs.unity3d.com/Manual/UnityCloudBuildManifest.html) in Unity Documentation.
 
 ## Author
 
