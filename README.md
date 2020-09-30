@@ -19,10 +19,16 @@ The following line needs to be added to your `Packages/manifest.json` file in yo
 add `using CloudBuildManifest;` and,
 
 ```csharp
-BuildManifest buildManifest = BuildManifest.Load();
-string buildInfo = buildManifest == null
-    ? "XXXXXXX #0"
-    : string.Format("{0} #{1}", buildManifest.CloudBuildTargetName, buildManifest.BuildNumber);
+string buildInfoText;
+if (BuildManifest.HasBuildManifest())
+{
+    var buildManifest = BuildManifest.Load();
+    buildInfoText = $"{buildManifest.CloudBuildTargetName} #{buildManifest.BuildNumber}";
+}
+else
+{
+    buildInfoText = "XXXXXXX #0";
+}
 ```
 
 Please call `BuildManifest.Load()`. If the running game app is not built with `Unity Cloud Build`, the method returns null. If the running game app is built with `Unity Cloud Build`, the method returns valid instance. CloudBuildManifest instance has next properties.
