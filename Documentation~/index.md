@@ -9,7 +9,7 @@ It is so important to get accurately build version and build commit of running g
 [Git](https://git-scm.com/) must be installed and added to your path.
 
 The following line needs to be added to your `Packages/manifest.json` file in your Unity Project under the `dependencies` section:
-Please replace `TAG_YOU_WANT_TO_USE` to the tag you want to use on GitHub.
+Please replace `TAG_YOU_WANT_TO_USE` to the tag you want to use on GitHub, i.e. v1.0.0.
 
 ```json
 "com.ryotamurohoshi.cloudbuildmanifest": "https://github.com/RyotaMurohoshi/CloudBuildManifest.git#TAG_YOU_WANT_TO_USE",
